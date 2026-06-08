@@ -5,7 +5,7 @@
 <div class="card" style="max-width:540px">
     <div class="card-title">{{ $servis ? '✏️ Edit Jasa Servis' : '➕ Tambah Jasa Servis' }}</div>
 
-    <form method="POST" action="{{ $servis ? route('servis.update',$servis) : route('servis.store') }}">
+    <form method="POST" action="{{ $servis ? route('servis.update', $servis) : route('servis.store') }}">
         @csrf
         @if($servis) @method('PUT') @endif
 
@@ -23,7 +23,7 @@
         <div class="form-group">
             <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-weight:normal">
                 <input type="checkbox" name="aktif" style="width:auto"
-                    {{ old('aktif', $servis->aktif ?? true) ? 'checked' : '' }}>
+                    {{ old('aktif', ($servis->aktif ?? true) ? '1' : '') ? 'checked' : '' }}
                 Servis Aktif (muncul di pilihan nota)
             </label>
         </div>

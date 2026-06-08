@@ -31,7 +31,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('barang', BarangController::class);
 
     // Servis
-    Route::resource('servis', ServisController::class);
+    Route::resource('servis', ServisController::class)->parameters([
+        'servis' => 'servis'
+    ]);
 
     // Nota
     Route::get('/nota',                  [NotaController::class, 'index'])->name('nota.index');

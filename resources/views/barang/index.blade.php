@@ -26,45 +26,47 @@
         <a href="{{ route('barang.index') }}" class="btn btn-secondary">Reset</a>
     </form>
 
-    <table>
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Kode</th>
-                <th>Nama Barang</th>
-                <th>Kategori</th>
-                <th>Stok</th>
-                <th>Harga Jual</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-        @forelse($barangs as $b)
-            <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td><code style="background:#f0f0f0;padding:2px 6px;border-radius:4px;font-size:12px">{{ $b->kode }}</code></td>
-                <td>{{ $b->nama }}</td>
-                <td>{{ $b->kategori->nama }}</td>
-                <td>
-                    <span class="badge {{ $b->stok == 0 ? 'badge-danger' : ($b->stok <= 5 ? 'badge-warning' : 'badge-success') }}">
-                        {{ $b->stok }} {{ $b->satuan }}
-                    </span>
-                </td>
-                <td>Rp {{ number_format($b->harga_jual,0,',','.') }}</td>
-                <td>
-                    <a href="{{ route('barang.edit',$b) }}" class="btn btn-warning btn-sm">Edit</a>
-                    <form method="POST" action="{{ route('barang.destroy',$b) }}" style="display:inline"
-                          onsubmit="return confirm('Hapus barang ini?')">
-                        @csrf @method('DELETE')
-                        <button class="btn btn-danger btn-sm">Hapus</button>
-                    </form>
-                </td>
-            </tr>
-        @empty
-            <tr><td colspan="7" style="text-align:center;color:#aaa;padding:20px">Barang tidak ditemukan</td></tr>
-        @endforelse
-        </tbody>
-    </table>
+    <div style="overflow-y:auto;max-height:480px">
+        <table>
+            <thead style="position:sticky;top:0;z-index:1">
+                <tr>
+                    <th>#</th>
+                    <th>Kode</th>
+                    <th>Nama Barang</th>
+                    <th>Kategori</th>
+                    <th>Stok</th>
+                    <th>Harga Jual</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+            @forelse($barangs as $b)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td><code style="background:#f0f0f0;padding:2px 6px;border-radius:4px;font-size:12px">{{ $b->kode }}</code></td>
+                    <td>{{ $b->nama }}</td>
+                    <td>{{ $b->kategori->nama }}</td>
+                    <td>
+                        <span class="badge {{ $b->stok == 0 ? 'badge-danger' : ($b->stok <= 5 ? 'badge-warning' : 'badge-success') }}">
+                            {{ $b->stok }} {{ $b->satuan }}
+                        </span>
+                    </td>
+                    <td>Rp {{ number_format($b->harga_jual,0,',','.') }}</td>
+                    <td>
+                        <a href="{{ route('barang.edit',$b) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <form method="POST" action="{{ route('barang.destroy',$b) }}" style="display:inline"
+                              onsubmit="return confirm('Hapus barang ini?')">
+                            @csrf @method('DELETE')
+                            <button class="btn btn-danger btn-sm">Hapus</button>
+                        </form>
+                    </td>
+                </tr>
+            @empty
+                <tr><td colspan="7" style="text-align:center;color:#aaa;padding:20px">Barang tidak ditemukan</td></tr>
+            @endforelse
+            </tbody>
+        </table>
+    </div>
 
     <div class="pagination">{{ $barangs->links() }}</div>
 </div>

@@ -17,41 +17,43 @@
         <a href="{{ route('nota.index') }}" class="btn btn-secondary">Reset</a>
     </form>
 
-    <table>
-        <thead>
-            <tr>
-                <th>No. Nota</th>
-                <th>Tanggal</th>
-                <th>Customer</th>
-                <th>Plat No.</th>
-                <th>Total</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-        @forelse($notas as $n)
-            <tr>
-                <td><strong style="color:#1a1a2e">{{ $n->nomor_nota }}</strong></td>
-                <td style="font-size:13px;color:#666">{{ $n->tanggal->format('d/m/Y H:i') }}</td>
-                <td>{{ $n->nama_customer }}</td>
-                <td style="font-size:13px">{{ $n->plat_nomor ?? '-' }}</td>
-                <td><strong>Rp {{ number_format($n->total,0,',','.') }}</strong></td>
-                <td>
-                    <a href="{{ route('nota.show',$n) }}" class="btn btn-primary btn-sm">Lihat</a>
-                    <a href="{{ route('nota.edit',$n) }}" class="btn btn-warning btn-sm">Edit</a>
-                    <a href="{{ route('nota.cetak',$n) }}" target="_blank" class="btn btn-secondary btn-sm">Cetak</a>
-                    <form method="POST" action="{{ route('nota.destroy',$n) }}" style="display:inline"
-                          onsubmit="return confirm('Hapus nota ini? Stok barang akan dikembalikan.')">
-                        @csrf @method('DELETE')
-                        <button class="btn btn-danger btn-sm">Hapus</button>
-                    </form>
-                </td>
-            </tr>
-        @empty
-            <tr><td colspan="6" style="text-align:center;color:#aaa;padding:24px">Belum ada nota</td></tr>
-        @endforelse
-        </tbody>
-    </table>
+    <div style="overflow-y:auto;max-height:480px">
+        <table>
+            <thead style="position:sticky;top:0;z-index:1">
+                <tr>
+                    <th>No. Nota</th>
+                    <th>Tanggal</th>
+                    <th>Customer</th>
+                    <th>Plat No.</th>
+                    <th>Total</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+            @forelse($notas as $n)
+                <tr>
+                    <td><strong style="color:#1a1a2e">{{ $n->nomor_nota }}</strong></td>
+                    <td style="font-size:13px;color:#666">{{ $n->tanggal->format('d/m/Y H:i') }}</td>
+                    <td>{{ $n->nama_customer }}</td>
+                    <td style="font-size:13px">{{ $n->plat_nomor ?? '-' }}</td>
+                    <td><strong>Rp {{ number_format($n->total,0,',','.') }}</strong></td>
+                    <td>
+                        <a href="{{ route('nota.show',$n) }}" class="btn btn-primary btn-sm">Lihat</a>
+                        <a href="{{ route('nota.edit',$n) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{{ route('nota.cetak',$n) }}" target="_blank" class="btn btn-secondary btn-sm">Cetak</a>
+                        <form method="POST" action="{{ route('nota.destroy',$n) }}" style="display:inline"
+                              onsubmit="return confirm('Hapus nota ini? Stok barang akan dikembalikan.')">
+                            @csrf @method('DELETE')
+                            <button class="btn btn-danger btn-sm">Hapus</button>
+                        </form>
+                    </td>
+                </tr>
+            @empty
+                <tr><td colspan="6" style="text-align:center;color:#aaa;padding:24px">Belum ada nota</td></tr>
+            @endforelse
+            </tbody>
+        </table>
+    </div>
 
     <div class="pagination">{{ $notas->links() }}</div>
 </div>
