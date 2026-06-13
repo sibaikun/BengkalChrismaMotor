@@ -88,6 +88,18 @@ class BarangController extends Controller
                          ->with('success', 'Barang berhasil diupdate.');
     }
 
+    // RINGKASAN - harga beli vs harga jual
+    public function ringkasanHarga()
+    {
+        $barangs = Barang::with('kategori')->orderBy('nama')->get();
+
+        $totalBeli   = $barangs->sum(fn($b) => $b->harga_beli * $b->stok);
+        $totalJual   = $barangs->sum(fn($b) => $b->harga_jual * $b->stok);
+        $totalProfit = $totalJual - $totalBeli;
+
+        return view('barang.ringkasan', compact('barangs', 'totalBeli', 'totalJual', 'totalProfit'));
+    }
+
     // DELETE - hapus barang
     public function destroy(Barang $barang)
     {

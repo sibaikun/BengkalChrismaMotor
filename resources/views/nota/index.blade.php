@@ -38,7 +38,7 @@
                     <td style="font-size:13px">{{ $n->plat_nomor ?? '-' }}</td>
                     <td><strong>Rp {{ number_format($n->total,0,',','.') }}</strong></td>
                     <td>
-                        <a href="{{ route('nota.show',$n) }}" class="btn btn-primary btn-sm">Lihat</a>
+                        <a href="{{ route('nota.show',$n) }}" class="btn btn-primary btn-sm">Detail</a>
                         <a href="{{ route('nota.edit',$n) }}" class="btn btn-warning btn-sm">Edit</a>
                         <a href="{{ route('nota.cetak',$n) }}" target="_blank" class="btn btn-secondary btn-sm">Cetak</a>
                         <form method="POST" action="{{ route('nota.destroy',$n) }}" style="display:inline"

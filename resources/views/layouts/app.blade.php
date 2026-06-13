@@ -94,11 +94,21 @@ tbody tr:hover{background:#fafafa}
         </a>
 
         <div class="group-label">Inventori</div>
-        <a href="{{ route('barang.index') }}" class="{{ request()->routeIs('barang.*') ? 'active':'' }}">
-            <span class="ico">📦</span> Stok Barang
-        </a>
         <a href="{{ route('kategori.index') }}" class="{{ request()->routeIs('kategori.*') ? 'active':'' }}">
             <span class="ico">🏷️</span> Kategori
+        </a>
+        <a href="{{ route('barang.index') }}" 
+        class="{{ request()->routeIs('barang.index','barang.create','barang.edit','barang.store') ? 'active':'' }}">
+            <span class="ico">📦</span> Stok Barang
+        </a>
+        {{-- <a href="{{ route('barang.ringkasan') }}" 
+        class="{{ request()->routeIs('barang.ringkasan') ? 'active':'' }}">
+            <span class="ico">📊</span> Ringkasan Harga
+        </a> --}}
+
+        <div class="group-label">Pengaturan</div>
+        <a href="{{ route('servis.index') }}" class="{{ request()->routeIs('servis.*') ? 'active':'' }}">
+            <span class="ico">⚙️</span> Jasa Servis
         </a>
 
         <div class="group-label">Transaksi</div>
@@ -109,10 +119,6 @@ tbody tr:hover{background:#fafafa}
             <span class="ico">🧾</span> Riwayat Nota
         </a>
 
-        <div class="group-label">Pengaturan</div>
-        <a href="{{ route('servis.index') }}" class="{{ request()->routeIs('servis.*') ? 'active':'' }}">
-            <span class="ico">⚙️</span> Harga Servis
-        </a>
     </nav>
     <div class="sidebar-footer">
         <form method="POST" action="{{ route('logout') }}">

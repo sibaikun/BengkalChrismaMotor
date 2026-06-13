@@ -1,10 +1,10 @@
 @extends('layouts.app')
-@section('title','Harga Servis')
+@section('title','Jasa Servis')
 @section('content')
 
 <div class="card">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-        <div class="card-title" style="margin:0;border:none">⚙️ Daftar Harga Servis</div>
+        <div class="card-title" style="margin:0;border:none">⚙️ Daftar Jasa Servis</div>
         <a href="{{ route('servis.create') }}" class="btn btn-success">+ Tambah Servis</a>
     </div>
 
