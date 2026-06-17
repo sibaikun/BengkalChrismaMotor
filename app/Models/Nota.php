@@ -14,11 +14,15 @@ class Nota extends Model
         'total',
         'catatan',
         'tanggal',
+        'is_void',
+        'voided_at',
     ];
 
     protected $casts = [
-        'tanggal' => 'datetime',
-        'total'   => 'decimal:2',
+        'tanggal'   => 'datetime',
+        'total'     => 'decimal:2',
+        'is_void'   => 'boolean',
+        'voided_at' => 'datetime',
     ];
 
     public function items()

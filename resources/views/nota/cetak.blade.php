@@ -5,7 +5,7 @@
 <title>Nota {{ $nota->nomor_nota }} — Chrisma Motor</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Courier New',monospace;font-size:12px;padding:10mm;max-width:80mm;margin:0 auto;color:#000}
+body{font-family:'Courier New',monospace;font-size:12px;padding:10mm;max-width:80mm;margin:0 auto;color:#000;position:relative}
 .header{text-align:center;border-bottom:2px dashed #000;padding-bottom:8px;margin-bottom:8px}
 .header h1{font-size:15px;letter-spacing:2px;font-weight:bold}
 .header p{font-size:11px;margin-top:2px}
@@ -25,7 +25,44 @@ body{font-family:'Courier New',monospace;font-size:12px;padding:10mm;max-width:8
 .btn-area button{padding:8px 20px;border:none;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600}
 .btn-print{background:#1a1a2e;color:#fff}
 .btn-close{background:#95a5a6;color:#fff}
-@media print{.btn-area{display:none}body{padding:0;max-width:100%}}
+
+/* ===== Watermark VOID ===== */
+.void-watermark{
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%) rotate(-45deg);
+    font-size:64px;
+    font-weight:900;
+    letter-spacing:6px;
+    color:rgba(200,0,0,0.18);
+    border:6px solid rgba(200,0,0,0.18);
+    border-radius:12px;
+    padding:6px 24px;
+    white-space:nowrap;
+    pointer-events:none;
+    z-index:0;
+    font-family:Arial,Helvetica,sans-serif;
+}
+.struk-content{position:relative;z-index:1}
+.void-info{
+    text-align:center;
+    background:#fdecea;
+    border:1.5px dashed #c0392b;
+    color:#c0392b;
+    font-weight:bold;
+    font-size:11px;
+    padding:6px;
+    border-radius:6px;
+    margin-bottom:10px;
+    letter-spacing:1px;
+}
+
+@media print{
+    .btn-area{display:none}
+    body{padding:0;max-width:100%}
+    .void-watermark{position:absolute;font-size:54px}
+}
 </style>
 </head>
 <body>
@@ -34,6 +71,21 @@ body{font-family:'Courier New',monospace;font-size:12px;padding:10mm;max-width:8
     <button class="btn-print" onclick="window.print()">🖨️ Cetak Sekarang</button>
     <button class="btn-close" onclick="window.close()">✕ Tutup</button>
 </div>
+
+@if($nota->is_void)
+<div class="void-watermark">VOID</div>
+@endif
+
+<div class="struk-content">
+
+@if($nota->is_void)
+<div class="void-info">
+    ⚠ NOTA INI SUDAH DI-VOID
+    @if($nota->voided_at)
+        <br>pada {{ $nota->voided_at->format('d/m/Y H:i') }}
+    @endif
+</div>
+@endif
 
 <div class="header">
     <h1>CHRISMA MOTOR</h1>
@@ -97,6 +149,8 @@ body{font-family:'Courier New',monospace;font-size:12px;padding:10mm;max-width:8
     <p>Terima kasih sudah mempercayakan</p>
     <p>kendaraan Anda kepada kami!</p>
     <p style="margin-top:6px;font-weight:bold">★ CHRISMA MOTOR SUBAH ★</p>
+</div>
+
 </div>
 
 </body>

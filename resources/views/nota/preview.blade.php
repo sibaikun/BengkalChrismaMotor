@@ -101,10 +101,33 @@
             <button type="submit" class="btn btn-success" style="padding:12px 28px;font-size:15px">
                 ✅ Konfirmasi & Simpan
             </button>
-            <a href="{{ route('nota.create') }}" class="btn btn-secondary" style="padding:12px 20px">
-                ← Kembali Edit
-            </a>
         </div>
+        </form>
+
+        {{-- Form terpisah khusus untuk kembali edit, membawa data balik --}}
+        <form method="POST" action="{{ route('nota.kembaliEdit') }}" style="display:inline-block;margin-top:8px">
+            @csrf
+            <input type="hidden" name="nama_customer" value="{{ $request->nama_customer }}">
+            <input type="hidden" name="no_hp"         value="{{ $request->no_hp }}">
+            <input type="hidden" name="plat_nomor"    value="{{ $request->plat_nomor }}">
+            <input type="hidden" name="catatan"       value="{{ $request->catatan }}">
+            @if($request->items)
+                @foreach($request->items as $i => $item)
+                    @if(!empty($item['id']) && !empty($item['qty']))
+                        <input type="hidden" name="items[{{ $i }}][id]"  value="{{ $item['id'] }}">
+                        <input type="hidden" name="items[{{ $i }}][qty]" value="{{ $item['qty'] }}">
+                    @endif
+                @endforeach
+            @endif
+            @if($request->servis_ids)
+                @foreach($request->servis_ids as $sid)
+                    <input type="hidden" name="servis_ids[]" value="{{ $sid }}">
+                @endforeach
+            @endif
+            <button type="submit" class="btn btn-secondary" style="padding:12px 20px">
+                ← Kembali Edit
+            </button>
+        </form>
     </form>
 </div>
 

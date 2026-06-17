@@ -35,14 +35,12 @@ Route::middleware('auth')->group(function () {
     Route::resource('servis', ServisController::class)->parameters(['servis' => 'servis']);
 
     // Nota
-    Route::get('/nota',                          [NotaController::class, 'index'])->name('nota.index');
-    Route::get('/nota/buat',                     [NotaController::class, 'create'])->name('nota.create');
-    Route::post('/nota/preview',                 [NotaController::class, 'preview'])->name('nota.preview');
-    Route::post('/nota/simpan',                  [NotaController::class, 'store'])->name('nota.store');
-    Route::get('/nota/{nota}',                   [NotaController::class, 'show'])->name('nota.show');
-    Route::get('/nota/{nota}/cetak',             [NotaController::class, 'cetak'])->name('nota.cetak');
-    Route::get('/nota/{nota}/edit',              [NotaController::class, 'edit'])->name('nota.edit');
-    Route::post('/nota/{nota}/preview-edit',     [NotaController::class, 'previewEdit'])->name('nota.preview.edit');
-    Route::put('/nota/{nota}',                   [NotaController::class, 'update'])->name('nota.update');
-    Route::delete('/nota/{nota}',                [NotaController::class, 'destroy'])->name('nota.destroy');
+    Route::get('/nota',                      [NotaController::class, 'index'])->name('nota.index');
+    Route::get('/nota/buat',                 [NotaController::class, 'create'])->name('nota.create');
+    Route::post('/nota/preview',             [NotaController::class, 'preview'])->name('nota.preview');
+    Route::post('/nota/simpan',              [NotaController::class, 'store'])->name('nota.store');
+    Route::get('/nota/{nota}',               [NotaController::class, 'show'])->name('nota.show');
+    Route::get('/nota/{nota}/cetak',         [NotaController::class, 'cetak'])->name('nota.cetak');
+    Route::patch('/nota/{nota}/void',        [NotaController::class, 'void'])->name('nota.void');
+    Route::post('/nota/kembali-edit', [NotaController::class, 'kembaliEdit'])->name('nota.kembaliEdit');
 });

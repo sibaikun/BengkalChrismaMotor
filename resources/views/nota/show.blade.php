@@ -6,11 +6,19 @@
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px" class="no-print">
         <div class="card-title" style="margin:0;border:none">🧾 Detail Nota</div>
         <div style="display:flex;gap:8px">
-            <a href="{{ route('nota.cetak',$nota) }}" target="_blank" class="btn btn-primary">🖨️ Cetak Nota</a>
-            <a href="{{ route('nota.edit',$nota) }}" class="btn btn-warning">✏️ Edit Nota</a>
-            <a href="{{ route('nota.index') }}" class="btn btn-secondary">← Kembali</a>
-        </div>
-    </div>
+                    <a href="{{ route('nota.cetak',$nota) }}" target="_blank" class="btn btn-primary">🖨️ Cetak Nota</a>
+                    @if(!$nota->is_void)
+                    <form action="{{ route('nota.void',$nota) }}" method="POST" onsubmit="return confirm('Yakin ingin void nota ini? Stok barang akan dikembalikan.')">
+                        @csrf
+                        @method('PATCH')
+                        <button type="submit" class="btn btn-warning">🚫 Void Nota</button>
+                    </form>
+                    @else
+                    <span class="btn btn-secondary" style="cursor:default">🚫 Sudah Void</span>
+                    @endif
+                    <a href="{{ route('nota.index') }}" class="btn btn-secondary">← Kembali</a>
+                </div>
+            </div>
 
     {{-- Info nota --}}
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:20px;font-size:14px">

@@ -20,11 +20,15 @@
             <input type="number" name="harga" value="{{ old('harga', $servis->harga ?? 0) }}" min="0" required>
         </div>
 
-        <div class="form-group">
-            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-weight:normal">
+       <div class="form-group">
+            <label>Status</label>
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-weight:normal;margin-top:4px">
                 <input type="checkbox" name="aktif" style="width:auto"
-                    {{ old('aktif', ($servis->aktif ?? true) ? '1' : '') ? 'checked' : '' }}
-                Servis Aktif (muncul di pilihan nota)
+                    {{ old('aktif', ($servis->aktif ?? true) ? '1' : '') ? 'checked' : '' }}>
+                <span>
+                    <span style="font-size:13px">Servis Aktif</span>
+                    <span style="font-size:11px;color:#999;display:block;margin-top:1px">Jika aktif, jasa ini akan muncul sebagai pilihan saat membuat nota</span>
+                </span>
             </label>
         </div>
 

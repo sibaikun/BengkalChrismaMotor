@@ -32,7 +32,7 @@ class ServisController extends Controller
         $servis = Servis::create([
             'nama'       => $request->nama,
             'harga'      => $request->harga,
-            'aktif'      => $request->aktif ?? $request->has('aktif'),
+            'aktif'      => $request->has('aktif'),
             'keterangan' => $request->keterangan,
         ]);
 
@@ -41,7 +41,7 @@ class ServisController extends Controller
         }
 
         return redirect()->route('servis.index')
-                         ->with('success', 'Jasa servis berhasil ditambahkan.');
+                        ->with('success', 'Jasa servis berhasil ditambahkan.');
     }
 
     // UPDATE - form edit
