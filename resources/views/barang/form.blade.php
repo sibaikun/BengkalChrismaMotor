@@ -65,7 +65,7 @@
 
         <div style="display:flex;gap:10px">
             <button type="submit" class="btn btn-success">💾 Simpan</button>
-            <a href="{{ route('barang.index') }}" class="btn btn-secondary">Batal</a>
+            <a href="{{ url()->previous() }}" class="btn btn-secondary">Batal</a>
         </div>
     </form>
 </div>

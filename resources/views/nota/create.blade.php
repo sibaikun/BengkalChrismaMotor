@@ -60,7 +60,7 @@
                 </div>
                 <div class="form-group">
                     <label>Plat Nomor</label>
-                    <input type="text" name="plat_nomor" value="{{ old('plat_nomor') }}" placeholder="H 1234 AB">
+                    <input type="text" name="plat_nomor" value="{{ old('plat_nomor') }}" placeholder="G 1234 AB">
                 </div>
             </div>
         </div>

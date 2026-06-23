@@ -8,42 +8,142 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Segoe UI',sans-serif;background:#f0f2f5;color:#333;display:flex;min-height:100vh}
 
-/* Sidebar */
-.sidebar{width:240px;background:#1a1a2e;color:#ccc;display:flex;flex-direction:column;flex-shrink:0;min-height:100vh}
-.sidebar-brand{padding:20px 16px;font-size:16px;font-weight:700;color:#fff;border-bottom:1px solid #2d2d4e}
-.sidebar-brand small{display:block;font-size:11px;font-weight:400;color:#888;margin-top:2px}
-.sidebar nav a{display:flex;align-items:center;gap:10px;padding:11px 18px;color:#aaa;text-decoration:none;font-size:14px;transition:background .15s,color .15s}
-.sidebar nav a:hover,.sidebar nav a.active{background:#16213e;color:#fff}
-.sidebar nav a .ico{font-size:16px;width:20px;text-align:center}
-.sidebar nav .group-label{padding:14px 18px 4px;font-size:11px;text-transform:uppercase;color:#555;letter-spacing:.06em}
-.sidebar-footer{margin-top:auto;padding:16px}
-.sidebar-footer form button{width:100%;padding:9px;background:#c0392b;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:13px}
+/* ── Sidebar Ceramic ── */
+.sidebar{
+    width:240px;
+    background:#f5efe6;
+    color:#4a3f35;
+    display:flex;
+    flex-direction:column;
+    flex-shrink:0;
+    min-height:100vh;
+    border-right:1px solid #e0d5c8;
+}
+.sidebar-brand{
+    padding:20px 16px;
+    font-size:16px;
+    font-weight:700;
+    color:#3b2f24;
+    border-bottom:1px solid #e0d5c8;
+    background:#ede4d8;
+}
+.sidebar-brand small{
+    display:block;
+    font-size:11px;
+    font-weight:400;
+    color:#9c8878;
+    margin-top:2px;
+}
 
-/* Main */
+.sidebar nav a{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:11px 18px;
+    color:#6b5a4e;
+    text-decoration:none;
+    font-size:14px;
+    transition:all .2s ease;
+    border-left:3px solid transparent;
+    position:relative;
+    overflow:hidden;
+}
+.sidebar nav a:hover{
+    background:linear-gradient(135deg,rgba(255,255,255,.55) 0%,rgba(220,200,180,.35) 50%,rgba(255,255,255,.2) 100%);
+    color:#3b2f24;
+    border-left-color:#c4956a;
+    backdrop-filter:blur(4px);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.7),inset 0 -1px 0 rgba(180,140,100,.15);
+}
+.sidebar nav a.active{
+    background:linear-gradient(135deg,rgba(255,255,255,.75) 0%,rgba(230,210,185,.6) 40%,rgba(255,252,248,.5) 100%);
+    color:#3b2f24;
+    font-weight:600;
+    border-left-color:#a0704a;
+    backdrop-filter:blur(6px);
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.9),
+        inset 0 -1px 0 rgba(160,112,74,.2),
+        inset 1px 0 0 rgba(255,255,255,.6),
+        0 2px 8px rgba(160,112,74,.12);
+}
+/* kilap shimmer di active */
+.sidebar nav a.active::before{
+    content:'';
+    position:absolute;
+    top:0;left:0;right:0;
+    height:40%;
+    background:linear-gradient(180deg,rgba(255,255,255,.45) 0%,rgba(255,255,255,0) 100%);
+    border-radius:0 0 50% 50%;
+    pointer-events:none;
+}
+/* kilap highlight hover */
+.sidebar nav a:hover::before{
+    content:'';
+    position:absolute;
+    top:0;left:0;right:0;
+    height:40%;
+    background:linear-gradient(180deg,rgba(255,255,255,.3) 0%,rgba(255,255,255,0) 100%);
+    pointer-events:none;
+}
+.sidebar nav a .ico{font-size:16px;width:20px;text-align:center}
+.sidebar nav .group-label{
+    padding:14px 18px 4px;
+    font-size:10px;
+    text-transform:uppercase;
+    color:#b09a8a;
+    letter-spacing:.08em;
+    font-weight:600;
+}
+
+.sidebar-footer{margin-top:auto;padding:16px;border-top:1px solid #e0d5c8}
+.sidebar-footer form button{
+    width:100%;
+    padding:9px;
+    background:#c0392b;
+    color:#fff;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:13px;
+    transition:.15s;
+}
+.sidebar-footer form button:hover{background:#a93226}
+
+/* ── Main ── */
 .main{flex:1;display:flex;flex-direction:column;overflow:hidden}
-.topbar{background:#fff;padding:12px 24px;border-bottom:1px solid #e5e7eb;display:flex;align-items:center;gap:12px}
-.topbar h1{font-size:18px;font-weight:600;color:#1a1a2e;flex:1}
-.topbar .user{font-size:13px;color:#666}
+.topbar{
+    background:#faf6f1;
+    padding:12px 24px;
+    border-bottom:1px solid #e0d5c8;
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+.topbar h1{font-size:18px;font-weight:600;color:#3b2f24;flex:1}
+.topbar .user{font-size:13px;color:#9c8878;background:#ede4d8;padding:5px 12px;border-radius:20px}
 .content{padding:24px;flex:1;overflow-y:auto}
 
-/* Cards */
-.card{background:#fff;border-radius:10px;padding:20px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
-.card-title{font-size:15px;font-weight:600;margin-bottom:16px;color:#1a1a2e;padding-bottom:8px;border-bottom:1px solid #f0f0f0}
+/* ── Cards ── */
+.card{background:#fff;border-radius:10px;padding:20px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.06);border:1px solid #ede4d8}
+.card-title{font-size:15px;font-weight:600;margin-bottom:16px;color:#3b2f24;padding-bottom:8px;border-bottom:1px solid #f0e8df}
 
-/* Stat cards */
+/* ── Stat cards ── */
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:24px}
-.stat{background:#fff;border-radius:10px;padding:18px;box-shadow:0 1px 4px rgba(0,0,0,.06);border-left:4px solid #3498db}
-.stat.green{border-color:#27ae60}.stat.orange{border-color:#e67e22}.stat.red{border-color:#e74c3c}
-.stat .val{font-size:26px;font-weight:700;color:#1a1a2e}
-.stat .lbl{font-size:12px;color:#888;margin-top:4px}
+.stat{background:#fff;border-radius:10px;padding:18px;box-shadow:0 1px 4px rgba(0,0,0,.06);border-left:4px solid #c4956a;border-top:1px solid #ede4d8;border-right:1px solid #ede4d8;border-bottom:1px solid #ede4d8}
+.stat.green{border-left-color:#6aaa7a}
+.stat.orange{border-left-color:#d4845a}
+.stat.red{border-left-color:#c0574a}
+.stat .val{font-size:26px;font-weight:700;color:#3b2f24}
+.stat .lbl{font-size:12px;color:#9c8878;margin-top:4px}
 
-/* Table */
+/* ── Table ── */
 table{width:100%;border-collapse:collapse;font-size:14px}
-thead th{background:#f8f9fa;padding:10px 12px;text-align:left;font-weight:600;color:#555;border-bottom:2px solid #e5e7eb}
-tbody td{padding:10px 12px;border-bottom:1px solid #f0f0f0;vertical-align:middle}
-tbody tr:hover{background:#fafafa}
+thead th{background:#faf0e8;padding:10px 12px;text-align:left;font-weight:600;color:#6b5a4e;border-bottom:2px solid #e0d5c8}
+tbody td{padding:10px 12px;border-bottom:1px solid #f5efe6;vertical-align:middle}
+tbody tr:hover{background:#fdf8f4}
 
-/* Buttons */
+/* ── Buttons ── */
 .btn{display:inline-block;padding:8px 16px;border-radius:6px;font-size:13px;text-decoration:none;border:none;cursor:pointer;font-weight:500;transition:.15s}
 .btn-primary{background:#3498db;color:#fff}.btn-primary:hover{background:#2980b9}
 .btn-success{background:#27ae60;color:#fff}.btn-success:hover{background:#219a52}
@@ -52,30 +152,31 @@ tbody tr:hover{background:#fafafa}
 .btn-secondary{background:#95a5a6;color:#fff}.btn-secondary:hover{background:#7f8c8d}
 .btn-sm{padding:5px 10px;font-size:12px}
 
-/* Forms */
+/* ── Forms ── */
 .form-group{margin-bottom:16px}
-.form-group label{display:block;margin-bottom:5px;font-size:13px;font-weight:500;color:#555}
-.form-group input,.form-group select,.form-group textarea{width:100%;padding:8px 12px;border:1px solid #ddd;border-radius:6px;font-size:14px;font-family:inherit;transition:.15s}
-.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:#3498db;box-shadow:0 0 0 3px rgba(52,152,219,.15)}
+.form-group label{display:block;margin-bottom:5px;font-size:13px;font-weight:500;color:#6b5a4e}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:8px 12px;border:1px solid #ddd;border-radius:6px;font-size:14px;font-family:inherit;transition:.15s;background:#fdfaf7}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:#c4956a;box-shadow:0 0 0 3px rgba(196,149,106,.15)}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .form-row.three{grid-template-columns:1fr 1fr 1fr}
 
-/* Alerts */
+/* ── Alerts ── */
 .alert{padding:12px 16px;border-radius:6px;margin-bottom:16px;font-size:14px}
 .alert-success{background:#d4edda;color:#155724;border:1px solid #c3e6cb}
 .alert-error{background:#f8d7da;color:#721c24;border:1px solid #f5c6cb}
 .alert-warning{background:#fff3cd;color:#856404;border:1px solid #ffeeba}
 
-/* Badge */
+/* ── Badge ── */
 .badge{display:inline-block;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600}
 .badge-success{background:#d4edda;color:#155724}
 .badge-danger{background:#f8d7da;color:#721c24}
 .badge-warning{background:#fff3cd;color:#856404}
 
-/* Pagination */
+/* ── Pagination ── */
 .pagination{margin-top:16px;display:flex;gap:4px;flex-wrap:wrap}
-.pagination a,.pagination span{padding:6px 12px;border:1px solid #ddd;border-radius:5px;font-size:13px;text-decoration:none;color:#333}
-.pagination .active span{background:#3498db;color:#fff;border-color:#3498db}
+.pagination a,.pagination span{padding:6px 12px;border:1px solid #e0d5c8;border-radius:5px;font-size:13px;text-decoration:none;color:#6b5a4e}
+.pagination a:hover{background:#f5efe6}
+.pagination .active span{background:#a0704a;color:#fff;border-color:#a0704a}
 
 @media print{.sidebar,.topbar,.no-print{display:none!important}.main{overflow:visible}}
 </style>
@@ -97,14 +198,10 @@ tbody tr:hover{background:#fafafa}
         <a href="{{ route('kategori.index') }}" class="{{ request()->routeIs('kategori.*') ? 'active':'' }}">
             <span class="ico">🏷️</span> Kategori
         </a>
-        <a href="{{ route('barang.index') }}" 
-        class="{{ request()->routeIs('barang.index','barang.create','barang.edit','barang.store') ? 'active':'' }}">
+        <a href="{{ route('barang.index') }}"
+           class="{{ request()->routeIs('barang.index','barang.create','barang.edit','barang.store') ? 'active':'' }}">
             <span class="ico">📦</span> Stok Barang
         </a>
-        {{-- <a href="{{ route('barang.ringkasan') }}" 
-        class="{{ request()->routeIs('barang.ringkasan') ? 'active':'' }}">
-            <span class="ico">📊</span> Ringkasan Harga
-        </a> --}}
 
         <div class="group-label">Pengaturan</div>
         <a href="{{ route('servis.index') }}" class="{{ request()->routeIs('servis.*') ? 'active':'' }}">
@@ -118,7 +215,6 @@ tbody tr:hover{background:#fafafa}
         <a href="{{ route('nota.index') }}" class="{{ request()->routeIs('nota.index') ? 'active':'' }}">
             <span class="ico">🧾</span> Riwayat Nota
         </a>
-
     </nav>
     <div class="sidebar-footer">
         <form method="POST" action="{{ route('logout') }}">

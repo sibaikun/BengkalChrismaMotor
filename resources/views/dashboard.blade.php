@@ -31,8 +31,15 @@
                 </thead>
                 <tbody>
                 @forelse($notaTerbaru as $n)
-                    <tr>
-                        <td><a href="{{ route('nota.show',$n) }}" style="color:#3498db;text-decoration:none">{{ $n->nomor_nota }}</a></td>
+                    <tr class="{{ $n->is_void ? 'row-void' : '' }}">
+                        <td>
+                            <a href="{{ route('nota.show',$n) }}" style="color:{{ $n->is_void ? '#999' : '#3498db' }};text-decoration:none">
+                                {{ $n->nomor_nota }}
+                            </a>
+                            @if($n->is_void)
+                                <span class="void-stamp">VOID</span>
+                            @endif
+                        </td>
                         <td>{{ $n->nama_customer }}</td>
                         <td>Rp {{ number_format($n->total,0,',','.') }}</td>
                     </tr>
@@ -63,5 +70,29 @@
         </div>
     </div>
 </div>
+
+<style>
+    .row-void {
+        opacity: 0.5;
+        filter: grayscale(30%);
+    }
+    .row-void td {
+        color: #999 !important;
+    }
+    .void-stamp {
+        display: inline-block;
+        margin-left: 6px;
+        padding: 1px 6px;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        color: #c0392b;
+        border: 1.5px solid #c0392b;
+        border-radius: 4px;
+        transform: rotate(-6deg);
+        vertical-align: middle;
+        opacity: 0.85;
+    }
+</style>
 
 @endsection
