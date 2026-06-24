@@ -11,7 +11,8 @@ return new class extends Migration
         Schema::create('nota_servis', function (Blueprint $table) {
             $table->id();
             $table->foreignId('nota_id')->constrained('notas')->onDelete('cascade');
-            $table->foreignId('servis_id')->constrained('servis')->onDelete('cascade');
+            $table->foreignId('servis_id')->nullable()->constrained('servis')->nullOnDelete();
+            $table->string('nama_servis')->nullable();
             $table->decimal('harga', 12, 2);
             $table->timestamps();
         });

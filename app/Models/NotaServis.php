@@ -9,6 +9,7 @@ class NotaServis extends Model
     protected $fillable = [
         'nota_id',
         'servis_id',
+        'nama_servis',
         'harga',
     ];
 

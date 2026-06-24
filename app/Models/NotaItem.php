@@ -9,6 +9,7 @@ class NotaItem extends Model
     protected $fillable = [
         'nota_id',
         'barang_id',
+        'nama_barang',
         'qty',
         'harga_satuan',
         'subtotal',

@@ -98,6 +98,7 @@ class NotaController extends Controller
                     NotaItem::create([
                         'nota_id'      => $nota->id,
                         'barang_id'    => $barang->id,
+                        'nama_barang'  => $barang->nama,
                         'qty'          => $item['qty'],
                         'harga_satuan' => $barang->harga_jual,
                         'subtotal'     => $subtotal,
@@ -112,9 +113,10 @@ class NotaController extends Controller
                     $servis = Servis::find($sid);
                     if (!$servis) continue;
                     NotaServis::create([
-                        'nota_id'   => $nota->id,
-                        'servis_id' => $servis->id,
-                        'harga'     => $servis->harga,
+                        'nota_id'    => $nota->id,
+                        'servis_id'  => $servis->id,
+                        'nama_servis'=> $servis->nama,
+                        'harga'      => $servis->harga,
                     ]);
                     $total += $servis->harga;
                 }
@@ -163,11 +165,5 @@ class NotaController extends Controller
         });
 
         return back()->with('success', 'Nota ' . $nota->nomor_nota . ' berhasil di-void. Stok barang sudah dikembalikan.');
-    }
-
-    // Kembali ke form create dengan data yang sudah diisi tetap terisi
-    public function kembaliEdit(Request $request)
-    {
-        return redirect()->route('nota.create')->withInput($request->all());
     }
 }

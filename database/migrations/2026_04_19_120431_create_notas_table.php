@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('plat_nomor')->nullable();
             $table->decimal('total', 12, 2)->default(0);
             $table->text('catatan')->nullable();
+            $table->boolean('is_void')->default(false);
+            $table->timestamp('voided_at')->nullable();
             $table->timestamp('tanggal')->useCurrent();
             $table->timestamps();
         });

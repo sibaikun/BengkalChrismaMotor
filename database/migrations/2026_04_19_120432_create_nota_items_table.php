@@ -11,7 +11,8 @@ return new class extends Migration
         Schema::create('nota_items', function (Blueprint $table) {
             $table->id();
             $table->foreignId('nota_id')->constrained('notas')->onDelete('cascade');
-            $table->foreignId('barang_id')->constrained('barangs')->onDelete('cascade');
+            $table->foreignId('barang_id')->nullable()->constrained('barangs')->nullOnDelete();
+            $table->string('nama_barang')->nullable();
             $table->integer('qty');
             $table->decimal('harga_satuan', 12, 2);
             $table->decimal('subtotal', 12, 2);
