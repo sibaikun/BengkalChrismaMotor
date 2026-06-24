@@ -153,9 +153,11 @@ class NotaController extends Controller
         }
 
         DB::transaction(function () use ($nota) {
-            // Kembalikan stok barang
+            // Kembalikan stok barang (hanya jika barang belum dihapus)
             foreach ($nota->items as $item) {
-                $item->barang->increment('stok', $item->qty);
+                if ($item->barang) {
+                    $item->barang->increment('stok', $item->qty);
+                }
             }
 
             $nota->update([

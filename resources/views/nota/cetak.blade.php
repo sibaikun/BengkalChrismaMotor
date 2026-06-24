@@ -26,37 +26,10 @@ body{font-family:'Courier New',monospace;font-size:12px;padding:10mm;max-width:8
 .btn-print{background:#1a1a2e;color:#fff}
 .btn-close{background:#95a5a6;color:#fff}
 
-/* ===== Watermark VOID ===== */
-.void-watermark{
-    position:fixed;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%) rotate(-45deg);
-    font-size:64px;
-    font-weight:900;
-    letter-spacing:6px;
-    color:rgba(200,0,0,0.18);
-    border:6px solid rgba(200,0,0,0.18);
-    border-radius:12px;
-    padding:6px 24px;
-    white-space:nowrap;
-    pointer-events:none;
-    z-index:0;
-    font-family:Arial,Helvetica,sans-serif;
-}
+/* Watermark VOID */
+.void-watermark{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-45deg);font-size:64px;font-weight:900;letter-spacing:6px;color:rgba(200,0,0,0.18);border:6px solid rgba(200,0,0,0.18);border-radius:12px;padding:6px 24px;white-space:nowrap;pointer-events:none;z-index:0;font-family:Arial,Helvetica,sans-serif}
 .struk-content{position:relative;z-index:1}
-.void-info{
-    text-align:center;
-    background:#fdecea;
-    border:1.5px dashed #c0392b;
-    color:#c0392b;
-    font-weight:bold;
-    font-size:11px;
-    padding:6px;
-    border-radius:6px;
-    margin-bottom:10px;
-    letter-spacing:1px;
-}
+.void-info{text-align:center;background:#fdecea;border:1.5px dashed #c0392b;color:#c0392b;font-weight:bold;font-size:11px;padding:6px;border-radius:6px;margin-bottom:10px;letter-spacing:1px}
 
 @media print{
     .btn-area{display:none}
@@ -111,10 +84,14 @@ body{font-family:'Courier New',monospace;font-size:12px;padding:10mm;max-width:8
 <div class="section-title">BARANG:</div>
 <table class="item-table">
 @foreach($nota->items as $item)
+@php
+    $namaBarang   = $item->nama_barang ?? optional($item->barang)->nama ?? '(Barang dihapus)';
+    $satuanBarang = optional($item->barang)->satuan ?? '';
+@endphp
 <tr>
     <td>
-        <div class="item-name">{{ $item->barang->nama }}</div>
-        <div class="item-detail">{{ $item->qty }} {{ $item->barang->satuan }} × Rp {{ number_format($item->harga_satuan,0,',','.') }}</div>
+        <div class="item-name">{{ $namaBarang }}</div>
+        <div class="item-detail">{{ $item->qty }} {{ $satuanBarang }} × Rp {{ number_format($item->harga_satuan,0,',','.') }}</div>
     </td>
     <td class="item-price">Rp {{ number_format($item->subtotal,0,',','.') }}</td>
 </tr>
@@ -127,8 +104,11 @@ body{font-family:'Courier New',monospace;font-size:12px;padding:10mm;max-width:8
 <div class="section-title">JASA SERVIS:</div>
 <table class="item-table">
 @foreach($nota->servisList as $ns)
+@php
+    $namaServis = $ns->nama_servis ?? optional($ns->servis)->nama ?? '(Servis dihapus)';
+@endphp
 <tr>
-    <td>{{ $ns->servis->nama }}</td>
+    <td>{{ $namaServis }}</td>
     <td class="item-price">Rp {{ number_format($ns->harga,0,',','.') }}</td>
 </tr>
 @endforeach
@@ -152,6 +132,5 @@ body{font-family:'Courier New',monospace;font-size:12px;padding:10mm;max-width:8
 </div>
 
 </div>
-
 </body>
 </html>
