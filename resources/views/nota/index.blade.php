@@ -8,14 +8,42 @@
         <a href="{{ route('nota.create') }}" class="btn btn-success">+ Buat Nota Baru</a>
     </div>
 
-    {{-- Filter pencarian --}}
-    <form method="GET" style="display:flex;gap:10px;margin-bottom:16px">
+    {{-- Filter --}}
+    <form method="GET" style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center">
+        {{-- Cari teks --}}
         <input type="text" name="search" value="{{ request('search') }}"
-               placeholder="Cari nama customer / no nota..."
-               style="padding:8px 12px;border:1px solid #ddd;border-radius:6px;font-size:13px;flex:1;max-width:320px">
+               placeholder="Cari customer / no nota..."
+               style="padding:8px 12px;border:1px solid #ddd;border-radius:6px;font-size:13px;width:210px">
+
+        {{-- Periode cepat --}}
+        <select name="periode" style="padding:8px 12px;border:1px solid #ddd;border-radius:6px;font-size:13px">
+            <option value="">— Semua Waktu —</option>
+            <option value="hari_ini"   {{ request('periode')=='hari_ini'   ? 'selected':'' }}>Hari Ini</option>
+            <option value="minggu_ini" {{ request('periode')=='minggu_ini' ? 'selected':'' }}>Minggu Ini</option>
+            <option value="bulan_ini"  {{ request('periode')=='bulan_ini'  ? 'selected':'' }}>Bulan Ini</option>
+        </select>
+
+        {{-- Range tanggal --}}
+        <input type="date" name="dari" value="{{ request('dari') }}"
+               style="padding:8px 12px;border:1px solid #ddd;border-radius:6px;font-size:13px">
+        <span style="font-size:13px;color:#888">s/d</span>
+        <input type="date" name="sampai" value="{{ request('sampai') }}"
+               style="padding:8px 12px;border:1px solid #ddd;border-radius:6px;font-size:13px">
+
         <button class="btn btn-secondary" type="submit">🔍 Cari</button>
         <a href="{{ route('nota.index') }}" class="btn btn-secondary">Reset</a>
     </form>
+
+    {{-- Info filter aktif --}}
+    @if(request('search') || request('periode') || request('dari') || request('sampai'))
+    <div style="background:#e8f4fd;border:1px solid #bee5f8;border-radius:6px;padding:8px 14px;margin-bottom:12px;font-size:13px;color:#1a6fa0">
+        🔍 Filter aktif:
+        @if(request('search')) <strong>{{ request('search') }}</strong> @endif
+        @if(request('periode')) · <strong>{{ ['hari_ini'=>'Hari Ini','minggu_ini'=>'Minggu Ini','bulan_ini'=>'Bulan Ini'][request('periode')] }}</strong> @endif
+        @if(request('dari')) · dari <strong>{{ request('dari') }}</strong> @endif
+        @if(request('sampai')) · s/d <strong>{{ request('sampai') }}</strong> @endif
+    </div>
+    @endif
 
     <div style="overflow-y:auto;max-height:480px">
         <table>
@@ -43,7 +71,8 @@
                     <td style="font-size:13px">{{ $n->plat_nomor ?? '-' }}</td>
                     <td><strong>Rp {{ number_format($n->total,0,',','.') }}</strong></td>
                     <td>
-                        <a href="{{ route('nota.show',$n) }}" class="btn btn-primary btn-sm">Detail</a>
+                        @php $qs = http_build_query(request()->only(['search','periode','dari','sampai','page'])); @endphp
+                        <a href="{{ route('nota.show',$n) }}?{{ $qs }}" class="btn btn-primary btn-sm">Detail</a>
                         <a href="{{ route('nota.cetak',$n) }}" target="_blank" class="btn btn-secondary btn-sm">Cetak</a>
                         @if(!$n->is_void)
                             <button type="button" class="btn btn-danger btn-sm"

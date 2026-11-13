@@ -15,13 +15,32 @@ class NotaController extends Controller
     // READ - daftar semua nota
     public function index(Request $request)
     {
-        $query = Nota::latest();
+        $query = Nota::latest('tanggal');
 
+        // Filter teks
         if ($request->search) {
             $query->where(function ($q) use ($request) {
                 $q->where('nama_customer', 'like', '%' . $request->search . '%')
                   ->orWhere('nomor_nota', 'like', '%' . $request->search . '%');
             });
+        }
+
+        // Filter periode cepat
+        if ($request->periode) {
+            match ($request->periode) {
+                'hari_ini'    => $query->whereDate('tanggal', today()),
+                'minggu_ini'  => $query->whereBetween('tanggal', [now()->startOfWeek(), now()->endOfWeek()]),
+                'bulan_ini'   => $query->whereMonth('tanggal', now()->month)->whereYear('tanggal', now()->year),
+                default       => null,
+            };
+        }
+
+        // Filter range tanggal manual
+        if ($request->dari) {
+            $query->whereDate('tanggal', '>=', $request->dari);
+        }
+        if ($request->sampai) {
+            $query->whereDate('tanggal', '<=', $request->sampai);
         }
 
         $notas = $query->paginate(15)->withQueryString();

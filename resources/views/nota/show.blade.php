@@ -15,7 +15,7 @@
             @else
                 <span class="btn btn-secondary" style="cursor:default">🚫 Sudah Void</span>
             @endif
-            <a href="{{ route('nota.index') }}" class="btn btn-secondary">← Kembali</a>
+            <a href="{{ route('nota.index') }}?{{ http_build_query(request()->only(['search','periode','dari','sampai','page'])) }}" class="btn btn-secondary">← Kembali</a>
         </div>
     </div>
 

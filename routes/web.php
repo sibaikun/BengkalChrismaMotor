@@ -42,5 +42,4 @@ Route::middleware('auth')->group(function () {
     Route::get('/nota/{nota}',               [NotaController::class, 'show'])->name('nota.show');
     Route::get('/nota/{nota}/cetak',         [NotaController::class, 'cetak'])->name('nota.cetak');
     Route::patch('/nota/{nota}/void',        [NotaController::class, 'void'])->name('nota.void');
-    Route::post('/nota/kembali-edit', [NotaController::class, 'kembaliEdit'])->name('nota.kembaliEdit');
 });
