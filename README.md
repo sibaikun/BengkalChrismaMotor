@@ -88,10 +88,6 @@ Aplikasi web untuk mengelola inventori dan operasional **Bengkel Chrisma Motor**
 php artisan test
 ```
 
-## 📸 Screenshot
-
-_(tambahkan screenshot halaman login dan dashboard di sini)_
-
 ## 👤 Pembuat
 
 **Sibaikun** – Mahasiswa Universitas Semarang (USM)
