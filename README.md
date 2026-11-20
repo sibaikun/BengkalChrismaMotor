@@ -1,58 +1,102 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🔧 Chrisma Motor – Sistem Inventori Bengkel
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplikasi web untuk mengelola inventori dan operasional **Bengkel Chrisma Motor** (Subah). Dibuat dengan Laravel supaya pencatatan stok dan data bengkel lebih rapi dan mudah dipantau.
 
-## About Laravel
+## ✨ Fitur
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- 🔐 Login admin
+- 📦 Manajemen inventori / stok barang
+- _(tambahkan fitur lain, misalnya: data sparepart, transaksi, laporan)_
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🛠️ Teknologi
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- [Laravel](https://laravel.com) (PHP) dengan Blade templating
+- [Vite](https://vitejs.dev) untuk aset frontend
+- MySQL / MariaDB _(sesuaikan dengan database yang kamu pakai)_
+- PHPUnit untuk testing
 
-## Learning Laravel
+## 📋 Kebutuhan Sistem
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- PHP >= 8.2
+- Composer
+- Node.js & npm
+- MySQL / MariaDB
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🚀 Instalasi
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+1. Clone repository
 
-## Agentic Development
+   ```bash
+   git clone https://github.com/sibaikun/BengkalChrismaMotor.git
+   cd BengkalChrismaMotor
+   ```
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+2. Install dependensi
+
+   ```bash
+   composer install
+   npm install
+   ```
+
+3. Salin file environment dan generate key
+
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
+
+4. Atur koneksi database di file `.env`
+
+   ```env
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=nama_database
+   DB_USERNAME=root
+   DB_PASSWORD=
+   ```
+
+5. Jalankan migrasi (dan seeder jika ada)
+
+   ```bash
+   php artisan migrate --seed
+   ```
+
+6. Jalankan aplikasi
+
+   ```bash
+   npm run dev
+   php artisan serve
+   ```
+
+   Buka `http://localhost:8000` di browser.
+
+## 🗂️ Struktur Folder
+
+| Folder       | Keterangan                              |
+| ------------ | --------------------------------------- |
+| `app/`       | Controller, model, dan logika aplikasi  |
+| `database/`  | Migrasi dan seeder                      |
+| `resources/` | View Blade, CSS, dan JS                 |
+| `routes/`    | Definisi route                          |
+| `public/`    | Aset publik (gambar, dll.)              |
+| `tests/`     | Pengujian otomatis                      |
+
+## 🧪 Testing
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+php artisan test
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+## 📸 Screenshot
 
-## Contributing
+_(tambahkan screenshot halaman login dan dashboard di sini)_
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 👤 Pembuat
 
-## Code of Conduct
+**Sibaikun** – Mahasiswa Universitas Semarang (USM)
+GitHub: [@sibaikun](https://github.com/sibaikun)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## 📄 Lisensi
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Proyek ini menggunakan lisensi [MIT](https://opensource.org/licenses/MIT).
